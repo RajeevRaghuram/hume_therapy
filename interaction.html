@@ -9,6 +9,21 @@
         margin 20px auto;
       }
     </style>
-<script>
-  
-  </script>
+<script type="module">
+  import MicFFT from './MicFFT.tsx';
+
+  async function accessMicrophone() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      console.log('Microphone access granted', stream);
+      // Use MicFFT with the audio stream as needed
+      const micFftInstance = new MicFFT(stream);
+      micFftInstance.start();
+    } catch (err) {
+      console.error('Error accessing microphone:', err);
+    }
+  }
+
+  // Call the function to access the microphone
+  accessMicrophone();
+</script>
